@@ -79,7 +79,7 @@ namespace Elsasoft.ScriptDb
                 ds.TableFilter = parameters.TableFilter.ToArray();
                 ds.TableDataFilter = parameters.TableDataFilter.ToArray();
                 var tableDataFile = parameters.TableDataFilterFile;
-                if(tableDataFile != null)
+                if (tableDataFile != null)
                 {
                     ds.DatabaseTableDataFilter = ReadTableDataFile(tableDataFile);
                 }
@@ -147,13 +147,13 @@ namespace Elsasoft.ScriptDb
         {
             var tablesByDatabase = new Dictionary<string, List<string>>();
             var lines = File.ReadAllLines(tableDataFile);
-            foreach(var line in lines)
+            foreach (var line in lines)
             {
-                if(string.IsNullOrEmpty(line) || line.IndexOf(':') == -1)
+                if (string.IsNullOrEmpty(line) || line.IndexOf(':') == -1)
                 {
                     continue;
                 }
-                var parts = line.Split(new[] {':'}, 2);
+                var parts = line.Split(new[] { ':' }, 2);
                 var databaseName = parts[0].ToUpperInvariant();
                 var tableNames = parts[1].ToUpperInvariant().Split(',');
                 tablesByDatabase.Add(databaseName, new List<string>(tableNames));

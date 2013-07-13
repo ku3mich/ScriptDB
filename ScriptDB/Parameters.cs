@@ -145,9 +145,14 @@ namespace ScriptDb
 
             if (p.Version)
             {
-                var assembly = typeof (Parameters).Assembly;
+                var assembly = typeof(Parameters).Assembly;
                 var name = Path.GetFileNameWithoutExtension(assembly.Location).ToLowerInvariant();
-                var version = assembly.GetCustomAttributes(typeof (AssemblyFileVersionAttribute), false).Cast<AssemblyFileVersionAttribute>().Select(a => a.Version).FirstOrDefault();
+                var version = assembly
+                    .GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false)
+                    .Cast<AssemblyFileVersionAttribute>()
+                    .Select(a => a.Version)
+                    .FirstOrDefault();
+
                 Console.Error.WriteLine("{0} version {1}", name, version);
                 return false;
             }
@@ -170,7 +175,11 @@ namespace ScriptDb
             }
             else
             {
-                filterList.AddRange(parameter.ToUpperInvariant().Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries));
+                filterList
+                    .AddRange(
+                        parameter
+                            .ToUpperInvariant()
+                            .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
             }
         }
 
